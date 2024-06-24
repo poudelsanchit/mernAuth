@@ -97,4 +97,20 @@ const RegisterUser = async (req, res) => {
   }
 };
 
-module.exports = { handleGetUser, LoginUser, RegisterUser };
+const getProfile = (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    JWT.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+      if (err) {
+        console.error("JWT Error:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      } else {
+        res.json(user);
+      }
+    });
+  } else {
+    res.json(null);
+  }
+};
+
+module.exports = { handleGetUser, LoginUser, RegisterUser, getProfile };

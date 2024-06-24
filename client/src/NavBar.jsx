@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/userContext";
 import { NavLink } from "react-router-dom";
 import { CgMenuRight } from "react-icons/cg";
 
 const NavBar = () => {
+  const { user } = useContext(UserContext);
+  console.log(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -10,10 +13,14 @@ const NavBar = () => {
       <div className="sm:w-[95%] w-[97%] flex sm:justify-center justify-around items-center gap-2">
         <div className="h-12 sm:w-9/12 w-full rounded-md flex items-center justify-between cursor-pointer">
           <div className="font-semibold font-Poppins pl-4 text-sm">
-            Admin Panel
+            Admin,
+            <span className="font-medium"> {!!user && user.username}</span>
           </div>
         </div>
-        <div className="h-12 w-2/12 rounded-md sm:hidden flex items-center justify-between cursor-pointer" onClick={() => setIsMenuOpen(prev => !prev)}>
+        <div
+          className="h-12 w-2/12 rounded-md sm:hidden flex items-center justify-between cursor-pointer"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
           <div className="font-semibold font-Poppins pl-4 text-2xl">
             <CgMenuRight />
           </div>
