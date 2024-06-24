@@ -17,10 +17,8 @@ const Home = () => {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
-    console.log("first");
   }, []);
 
-  console.log(users);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
