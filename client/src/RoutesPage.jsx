@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import Email from "./pages/Email";
-import Contact from "./pages/Contact";
+import Page2 from "./pages/Page2";
+import Page3 from "./pages/Page3";
 import UserLogin from "./pages/UserLogin";
 import UserRegister from "./pages/UserRegister";
 import { UserContext } from "../context/userContext";
@@ -13,8 +13,8 @@ const RoutesPage = () => {
 
   const routes = [
     { name: "/", element: <Home /> },
-    { name: "/email", element: <Email /> },
-    { name: "/contact", element: <Contact /> },
+    { name: "/page2", element: <Page2 /> },
+    { name: "/page3", element: <Page3 /> },
   ];
 
   return (
