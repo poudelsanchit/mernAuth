@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiLock, CiUser } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from "../../context/userContext";
 
 const InputField = ({ icon, placeholder, value, onChange, type }) => {
   return (
@@ -21,6 +22,7 @@ const InputField = ({ icon, placeholder, value, onChange, type }) => {
 
 const UserLogin = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -29,12 +31,12 @@ const UserLogin = () => {
   const handleLogin = async () => {
     const { email, password } = data;
     try {
-      const { data } = await axios.post("/login", { email, password });
-      console.log(data);
-      if (data.error) {
-        toast.error(data.error);
+      const response = await axios.post("/login", { email, password });
+      if (response.data.error) {
+        toast.error(response.data.error);
       } else {
-        toast.success("User logged in  Succesfully, Welcome!");
+        toast.success("User logged in successfully, Welcome!");
+        setUser(response.data.user); // Update user context
         navigate("/");
       }
     } catch (error) {
@@ -43,7 +45,7 @@ const UserLogin = () => {
   };
 
   return (
-    <div className="h-screen w-full z-50 bg-primarybackground  flex justify-center sm:pt-32 pt-10 text-white">
+    <div className="h-screen w-full z-50 bg-primarybackground flex justify-center sm:pt-32 pt-10 text-white">
       <div className="md:w-[38%] h-[32rem] shadow-lg rounded-lg p-4 flex flex-col gap-10 items-center">
         <div className="w-full justify- flex flex-col text-3xl font-medium font-Roboto tracking-normal gap-2">
           <div>Login to Mantra Architects</div>

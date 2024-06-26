@@ -52,7 +52,7 @@ const LoginUser = async (req, res) => {
           })
           .json({
             msg: "Logged in successfully",
-            user,
+            user: { email: user.email, username: user.username, id: user._id }, // Send user info
           });
       }
     );
@@ -101,6 +101,7 @@ const getProfile = (req, res) => {
   const { token } = req.cookies;
   if (token) {
     JWT.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+      console.log(user);
       if (err) {
         console.error("JWT Error:", err);
         return res.status(500).json({ error: "Internal server error" });
@@ -112,5 +113,20 @@ const getProfile = (req, res) => {
     res.json(null);
   }
 };
+const LogoutUser = (req, res) => {
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    })
+    .json({ message: "Logged out successfully" });
+};
 
-module.exports = { handleGetUser, LoginUser, RegisterUser, getProfile };
+module.exports = {
+  handleGetUser,
+  LoginUser,
+  RegisterUser,
+  getProfile,
+  LogoutUser,
+};

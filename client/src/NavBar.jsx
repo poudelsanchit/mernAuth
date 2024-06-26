@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { NavLink } from "react-router-dom";
 import { CgMenuRight } from "react-icons/cg";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const NavBar = () => {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   console.log(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -77,6 +78,9 @@ const NavBar = () => {
             EMAIL
           </div>
         </NavLink>
+        <div onClick={logout} className=" text-xl p-1 rounded-sm bg-secondaybackground hover:scale-105 flex justify-center items-center ">
+          <IoLogOutOutline className="rotate-180 cursor-pointer    " />
+        </div>
       </div>
     </div>
   );
