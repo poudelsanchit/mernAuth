@@ -46,11 +46,11 @@ const UserLogin = () => {
 
   return (
     <div className="h-screen w-full z-50 bg-primarybackground flex justify-center sm:pt-32 pt-10 text-white">
-      <div className="md:w-[38%] h-[32rem] shadow-lg rounded-lg p-4 flex flex-col gap-10 items-center">
+      <div className="md:w-[38%] h-[32rem]  rounded-lg p-4 flex flex-col gap-10 items-center">
         <div className="w-full justify- flex flex-col text-3xl font-medium font-Roboto tracking-normal gap-2">
-          <div>Login to Mantra Architects</div>
+          <div>Login Page</div>
           <div className="text-[#686c6c] font-Roboto text-xs">
-            Interiors and Architecture
+            Login to your account
           </div>
         </div>
         <div className="flex flex-col gap-4 w-full">
